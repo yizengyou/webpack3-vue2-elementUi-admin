@@ -6,7 +6,7 @@ import 'normalize.css/normalize.css'// CSS重置的现代替代品
 import ElementUI from 'element-ui'  //引入element-ui
 import 'element-ui/lib/theme-chalk/index.css'
 
-//import locale from 'element-ui/lib/locale/lang/en' // lang i18n 引入国际化语言切换
+// import locale from 'element-ui/lib/locale/lang/en' // lang i18n 引入国际化语言切换
 
 import '@/styles/index.scss' // 全局样式
 
