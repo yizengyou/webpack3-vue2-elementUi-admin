@@ -30,7 +30,7 @@ module.exports = {
     output: {
         path: config.build.assetsRoot,//构建的文件生成到哪个文件夹中
         filename: '[name].js', //生成的文件名
-        //所有资源加载的根路径 分生产和开发配置
+        //生产模式或开发模式下html、js等文件内部引用的公共路径
         publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
@@ -40,6 +40,20 @@ module.exports = {
         //自动解析确定的扩展-能够使用户在引入模块时不带扩展
         extensions: ['.js', '.vue', '.json'],
         //创建 import 或 require 的别名，来确保模块引入变得更简单
+        /*
+         比如如下文件
+         src
+           components
+             a.vue
+           router
+             home
+               index.vue
+          在index.vue里面，正常引用A组件；如下：
+          import A from '../../components/a.vue';
+          如果设置了 alias后，那么引用的地方可以如下这样了
+          import A from '@/components/a.vue';
+          注意：这里的 @ 起到了 resolve('src')路径的作用了。
+        */
         alias: {
             '@': resolve('src') //模块别名@指向src路径
         }
@@ -83,7 +97,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+                test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,  //字体文件
                 loader: 'url-loader',
                 options: {
                     limit: 10000,

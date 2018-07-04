@@ -7,7 +7,7 @@ const merge = require('webpack-merge')
 const baseWebpackConfig = require('./webpack.base.conf') // 输出webpack基础配置
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
-const portfinder = require('portfinder')
+const portfinder = require('portfinder') //查看端口进程
 const fs = require('fs')
 
 /***************************************
@@ -47,6 +47,7 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 //合并配置文件
 const devWebpackConfig = merge(baseWebpackConfig, {
     module: {
+        // 通过传入一些配置来获取rules配置，此处传入了sourceMap: false,表示不生成sourceMap
         rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
     },
     // cheap-module-eval-source-map is faster for development
@@ -90,25 +91,31 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         }
     },
     plugins: [
+        // 编译时配置的全局变量
         new webpack.DefinePlugin({
-            'process.env': require('../config/dev.env')
+            'process.env': require('../config/dev.env') //当前环境为开发环境
         }),
+        //热更新插件
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+        // HMR在更新时在控制台显示正确的文件名。
+        new webpack.NamedModulesPlugin(),
+        //在编译出现错误时，使用 NoEmitOnErrorsPlugin 来跳过输出阶段。这样可以确保输出资源不会包含错误。对于所有资源，统计资料(stat)的 emitted 标识都是 false。
         new webpack.NoEmitOnErrorsPlugin(),
         // https://github.com/ampedandwired/html-webpack-plugin
+        //自动生成html文件,比如编译后文件的引入
         new HtmlWebpackPlugin({
-            filename: 'index.html',
-            template: 'index.html',
-            inject: true,
-            favicon: resolve('favicon.ico'),
-            title: 'vue-element-admin'
+            filename: 'index.html', //生成的文件名
+            template: 'index.html', //模板
+            inject: true, //将所有资产注入给定模板
+            favicon: resolve('favicon.ico'),//将给定的图标路径添加到输出HTML
+            title: '我的后台管理系统模板' //标题
         }),
     ]
 })
 
 module.exports = new Promise((resolve, reject) => {
     portfinder.basePort = process.env.PORT || config.dev.port
+    //检查端口进程-是否占用
     portfinder.getPort((err, port) => {
         if (err) {
             reject(err)
@@ -119,7 +126,7 @@ module.exports = new Promise((resolve, reject) => {
             devWebpackConfig.devServer.port = port
 
             // Add FriendlyErrorsPlugin
-            devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
+            devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({ //输出友好提示
                 compilationSuccessInfo: {
                     messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
                 },

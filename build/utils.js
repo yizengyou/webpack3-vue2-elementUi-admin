@@ -55,7 +55,7 @@ exports.cssLoaders = function (options) {
   }
 
   // https://vue-loader.vuejs.org/en/configurations/extract-css.html
-  return {
+  return { //返回css类型对应的loader组成的对象 generateLoaders()来生成loader
     css: generateLoaders(),
     postcss: generateLoaders(),
     less: generateLoaders('less'),
@@ -69,6 +69,7 @@ exports.cssLoaders = function (options) {
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
   const output = []
+    //调用了exports.cssLoaders(options),用来返回针对各类型的样式文件的处理方式,
   const loaders = exports.cssLoaders(options)
 
   for (const extension in loaders) {
