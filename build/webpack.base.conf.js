@@ -1,5 +1,5 @@
 'use strict'
-const path = require('path')
+const path = require('path') //路径计算模块
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
@@ -20,21 +20,28 @@ const createLintingRule = () => ({
 })
 
 module.exports = {
+    //基础目录，绝对路径，用于从配置中解析入口起点(上下文)
     context: path.resolve(__dirname, '../'),
+    //当存在多个入口时 ，可以使用 Array 的方式，比如依赖第三方库 babel-polyfill ，
+    //最终 babel-polyfill 会被追加到打包好的输出文件中，数组中的最后一个会被 export。
     entry: {
-        app: ['babel-polyfill', './src/main.js'] //构建的入口文件
+        app: ['babel-polyfill', './src/main.js'] //构建的入口文件 等价于 entry: ['babel-polyfill', './src/main.js']
     },
     output: {
         path: config.build.assetsRoot,//构建的文件生成到哪个文件夹中
         filename: '[name].js', //生成的文件名
+        //所有资源加载的根路径 分生产和开发配置
         publicPath: process.env.NODE_ENV === 'production'
             ? config.build.assetsPublicPath
             : config.dev.assetsPublicPath
     },
+    //配置模块如何解析
     resolve: {
+        //自动解析确定的扩展-能够使用户在引入模块时不带扩展
         extensions: ['.js', '.vue', '.json'],
+        //创建 import 或 require 的别名，来确保模块引入变得更简单
         alias: {
-            '@': resolve('src')
+            '@': resolve('src') //模块别名@指向src路径
         }
     },
     module: {
