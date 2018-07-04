@@ -4,7 +4,7 @@ const utils = require('./utils')
 const webpack = require('webpack')
 const config = require('../config') //读取配置
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
+const baseWebpackConfig = require('./webpack.base.conf') // 输出webpack基础配置
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
@@ -40,9 +40,11 @@ function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
 
+//读取config/index.js中的环境配置(其实全是undefined，根本没有配置这个)
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
+//合并配置文件
 const devWebpackConfig = merge(baseWebpackConfig, {
     module: {
         rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})

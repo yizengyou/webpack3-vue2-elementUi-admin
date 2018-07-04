@@ -2,7 +2,7 @@
 const path = require('path') //路径计算模块
 const utils = require('./utils')
 const config = require('../config')
-const vueLoaderConfig = require('./vue-loader.conf')
+const vueLoaderConfig = require('./vue-loader.conf') // loader .vue文件的配置
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
@@ -46,7 +46,7 @@ module.exports = {
     },
     module: {
         rules: [
-            ...(config.dev.useEslint ? [createLintingRule()] : []),
+            ...(config.dev.useEslint ? [createLintingRule()] : []), //根据配置文件确定是否需要加入代码规则检查插件
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
@@ -92,6 +92,7 @@ module.exports = {
             }
         ]
     },
+    //这些选项可以配置是否 polyfill 或 mock 某些 Node.js 全局变量和模块
     node: {
         // prevent webpack from injecting useless setImmediate polyfill because Vue
         // source contains it (although only uses it if it's native).
