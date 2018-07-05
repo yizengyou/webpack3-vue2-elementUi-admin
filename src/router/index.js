@@ -39,9 +39,15 @@ export const constantRouterMap = [
         component: Layout,
         redirect: '/dashboard',
         name: 'Dashboard',
-        hidden: true,
+        meta: {
+            title: '首页'
+        },
+        hidden: true, //是否在导航中显示
         children: [{
             path: 'dashboard',
+            meta: {
+                title: '首页'
+            },
             component: () => import('@/views/dashboard/index')
         }]
     }
@@ -60,19 +66,22 @@ export const asyncRouterMap = [
         component: Layout,
         redirect: '/example/table',
         name: 'Example',
-        meta: {title: 'Example', icon: 'example'},
+        meta: {
+            title: '数据', //导航名
+            icon: 'example' //图标icon
+        },
         children: [
             {
                 path: 'table',
                 name: 'Table',
                 component: () => import('@/views/table/index'),
-                meta: {title: 'Table', icon: 'table'}
+                meta: {title: '表格', icon: 'table'}
             },
             {
                 path: 'tree',
                 name: 'Tree',
                 component: () => import('@/views/tree/index'),
-                meta: {title: 'Tree', icon: 'tree', roles: ['admin']}
+                meta: {title: '树型图', icon: 'tree', roles: ['admin']}
             }
         ]
     },
@@ -85,7 +94,10 @@ export const asyncRouterMap = [
                 path: 'index',
                 name: 'Form',
                 component: () => import('@/views/form/index'),
-                meta: {title: 'Form', icon: 'form'}
+                meta: {
+                    title: '表单',
+                    icon: 'form'
+                }
             }
         ]
     },

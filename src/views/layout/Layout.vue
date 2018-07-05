@@ -6,7 +6,9 @@
         <sidebar class="sidebar-container"></sidebar>
         <!--页面主体-->
         <div class="main-container">
+            <!--上导航-->
             <navbar></navbar>
+            <!--显示内容-->
             <app-main></app-main>
         </div>
     </div>
