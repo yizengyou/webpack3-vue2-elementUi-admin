@@ -80,7 +80,7 @@ const webpackConfig = merge(baseWebpackConfig, {
             template: 'index.html', //模板文件
             inject: true, //将所有资资源注入给定模板
             favicon: resolve('favicon.ico'), //将给定的图标路径添加到输出HTML
-            title: 'vue-element-admin', //页面标题
+            title: '测试', //页面标题
             minify: { //压缩配置
                 removeComments: true, //删除html中的注释代码
                 collapseWhitespace: true, //删除html中的空白符
