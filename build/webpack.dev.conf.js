@@ -106,7 +106,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         new HtmlWebpackPlugin({
             filename: 'index.html', //生成的文件名
             template: 'index.html', //模板
-            inject: true, //将所有资产注入给定模板
+            inject: true, //将所有资资源注入给定模板
             favicon: resolve('favicon.ico'),//将给定的图标路径添加到输出HTML
             title: '我的后台管理系统模板' //标题
         }),

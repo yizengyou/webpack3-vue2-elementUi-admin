@@ -50,7 +50,7 @@ module.exports = {
 
     build: {
         // Template for index.html
-        index: path.resolve(__dirname, '../dist/index.html'),
+        index: path.resolve(__dirname, '../dist/index.html'), //生产打包，html文件输出配置（路径和文件名）
 
         // Paths
         assetsRoot: path.resolve(__dirname, '../dist'), //构建到该文件夹中
