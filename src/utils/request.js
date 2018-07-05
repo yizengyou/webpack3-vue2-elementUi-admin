@@ -16,6 +16,11 @@ service.interceptors.request.use(config => {
     if (store.getters.token) {
         config.headers['X-Token'] = getToken() // 让每个请求携带自定义token 请根据实际情况自行修改
     }
+    //请求增加时间戳-去除缓存
+    config.params = Object.assign(config.params || {}, {
+        _: +new Date()
+    })
+
     return config
 }, error => {
     // Do something with request error
