@@ -46,6 +46,18 @@
                 </template>
             </el-table-column>
         </el-table>
+        <div class="foot">
+            <el-pagination
+                    background
+                    @size-change="handleSizeChange"
+                    @current-change="handleCurrentChange"
+                    :current-page.sync="currentPage"
+                    :page-sizes="[100, 200, 300, 400]"
+                    :page-size="100"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="10000">
+            </el-pagination>
+        </div>
 
         <el-dialog
                 title="提示"
@@ -92,7 +104,7 @@
             return {
                 tableData: tableData,
                 dialogVisible: false, //弹出框-编辑数据
-
+                currentPage: 1,//分页-当前是第几页
                 ruleForm: {
                     date: '',
                     name: '',
@@ -135,15 +147,24 @@
                 console.log(index);
                 console.log(row);
             },
-            submit (formName){
+            submit(formName) {
+
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        alert('submit!');
+                        console.log('验证通过');
                     } else {
                         console.log('error submit!!');
                         return false;
                     }
                 });
+            },
+            //切换一页展示多少条
+            handleSizeChange(size) {
+                console.log('一页展示：' + size);
+            },
+            //切换到第几页
+            handleCurrentChange(currentPage) {
+                console.log('当前是第：' + currentPage);
             }
         },
         // 局部注册子组件
