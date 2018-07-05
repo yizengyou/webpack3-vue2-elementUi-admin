@@ -82,6 +82,12 @@ export const asyncRouterMap = [
                 name: 'Tree',
                 component: () => import('@/views/tree/index'),
                 meta: {title: '树型图', icon: 'tree', roles: ['admin']}
+            },
+            {
+                path: 'my_table',
+                name: 'my_table',
+                component: () => import('@/views/table/table'),
+                meta: {title: '表格综合', icon: 'table'}
             }
         ]
     },
